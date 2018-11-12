@@ -53,11 +53,18 @@ def draw_two_cable(verticies, edges):
     glVertex3fv((-1.5, 4, 8.5))
     glEnd()
 
-def draw_mid_cable(verticies, edges):
+def draw_mid_cable(verticies, edges, height):
     glColor(1.0, 0.0, 0.0)
     glBegin(GL_LINES)
-    glVertex3fv((0, -4, 10))
-    glVertex3fv((0, 4, 10))
+    glVertex3fv((0, -4, height))
+    glVertex3fv((0, 4, height))
+    glEnd()
+
+def draw_mid_2_cable(verticies, edges, height):
+    glColor(1.0, 0.0, 0.0)
+    glBegin(GL_LINES)
+    glVertex3fv((4, 0, height))
+    glVertex3fv((0, 0, height))
     glEnd()
 
 
@@ -115,13 +122,17 @@ def main():
                 quit()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # 用来删除就得画面，清空画布
         ##############################################################################################
-        Cube(verticies, edges)  # 创建模型
+        #Cube(verticies, edges)  # 创建模型
         #             r   h   n_slice
         draw_cylinder(0.5, 20, 20)
-        draw_two_cable(verticies, edges)
-        draw_mid_cable(verticies, edges)
+        #draw_two_cable(verticies, edges)
+        draw_mid_cable(verticies, edges, 3)
+        draw_mid_cable(verticies, edges, 6)
+        draw_mid_cable(verticies, edges, 9)
+        draw_mid_2_cable(verticies, edges, 6)
+        #draw_mid_2_cable(verticies, edges, 9)
         ##############################################################################################
-        glRotatef(1, 0, -1, 0)  # 旋转矩阵
+        glRotatef(1, 1, -1, -1)  # 旋转矩阵
 
         pygame.display.flip()  # 显示画面
         pygame.time.wait(10)  # 10ms刷新一次
